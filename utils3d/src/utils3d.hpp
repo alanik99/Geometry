@@ -5,7 +5,7 @@
 
 #include <cmath>
 #include <algorithm>
-#include <optional>
+#include <expected>
 
 /** @brief Checks if two floating-point numbers are equal with the given epsilon (machine epsilon by default)
 */
@@ -115,7 +115,7 @@ namespace utils3D {
 
     /** @brief Distance between two segments
     */
-    std::optional<double> distance(const Segment& s1, const Segment& s2) {
+    std::expected<double, std::string> distance(const Segment& s1, const Segment& s2) {
 
         /*  We need to make parametric equations for the first and second segments:
 
@@ -148,7 +148,7 @@ namespace utils3D {
         // Check neither of the segments is a point
         // TODO support such case
         if (equal(u.length(), 0.0) || equal(v.length(), 0.0)) {
-            return std::nullopt;
+            return std::unexpected("Some of the segments is a point");
         }
 
         // Constants needed for the equations

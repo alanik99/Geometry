@@ -1,6 +1,6 @@
 #pragma once
 
-#include <type_traits>
+#include <concepts>
 #include <limits>
 
 #include <cmath>
@@ -9,7 +9,7 @@
 
 /** @brief Checks if two floating-point numbers are equal with the given epsilon (machine epsilon by default)
 */
-template <typename T, std::enable_if_t<std::is_floating_point<T>::value, bool> = true>
+template <std::floating_point T>
 constexpr inline bool equal(const T a, const T b, const T epsilon = std::numeric_limits<T>::epsilon()) {
     return std::fabs(a - b) < epsilon;
 }
